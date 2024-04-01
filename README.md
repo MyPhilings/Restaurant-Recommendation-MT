@@ -13,5 +13,4 @@ HTML,
 CSS
 
 API:
-Yelp,
-Zomato
+Worldwide Restaurants API
