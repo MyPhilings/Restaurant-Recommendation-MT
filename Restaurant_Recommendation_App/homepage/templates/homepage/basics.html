@@ -1,0 +1,96 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'homepage/index.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <title>Discover Eats</title>
+</head>
+<body id="container">
+
+    <div class="copyright">
+        <p>Copyright &copy; 2024 <NAME>OK Enterprise</p>
+    </div>
+
+    <div class="diagonal-bg-1">
+        <div class="custom-shape-divider-bottom-1711278834">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M1200,0H0V120H281.94C572.9,116.24,602.45,3.86,602.45,3.86h0S632,116.24,923,120h277Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </div>
+
+    <div class="logo">
+        <a href="#hero"><h1>D.Eats</h1></a>
+    </div>
+    
+    <div class="hero" id="hero">
+        <center>
+            <h1>Discover Eats</h1>
+            <p>"You deserve the best. So we'll leave it in your hands" -My Right Hemisphere</p>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                {{restaurant_input}}
+                <input type="submit" value="Search"/>
+            </form>
+        </center>
+
+    </div>
+
+    <div class="content-header">
+    <center><h2>Restaurants in {{ typeAhead.results.data.0.result_object.name }}</h2></center>
+    <a id="scrollToRestaurants"></a>
+    </div>
+
+    {% if restaurant_in_typeAhead %}
+
+        <table style="margin: 2%; padding: 3%; border-radius: 10px; border-spacing: 2px 2px; border-radius: 2px; background-image: linear-gradient(45deg, rgb(240, 157, 81), rgb(247, 37, 133), rgb(181,23,158),rgb(247, 37, 133));">
+
+            <thead style="background-color: rgba(58, 58, 58, 0.8); color: #fff;">
+                <tr>
+                    <th style="padding: 10px; font-weight: bold; border-radius: 2px;">Restaurant</th>
+                    <th style="padding: 10px; font-weight: bold; border-radius: 2px;">Description</th>
+                    <th style="padding: 10px; font-weight: bold; border-radius: 2px;">Location</th>
+                    <th style="padding: 10px; font-weight: bold; border-radius: 2px;">Ratings</th>
+                    <th style="padding: 10px; font-weight: bold; border-radius: 2px;">Reviews</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for restaurant in restaurant_in_typeAhead.results.data %}
+
+                <!-- Checks if Description is Empty, so they won't display. Remove the if statement if you still want them -->
+                {% if restaurant.description %}
+                <tr style="background-color: rgba(58, 58, 58, 0.8); color: #fff;">
+                    <td>
+                        <div style="text-align: center; font-weight: bold; padding: 10px; border-radius: 2px;">
+                            <div>{{ restaurant.name|truncatewords:4 }}</div> <br> 
+                            <a href="{{ restaurant.website }}"><img src="{{ restaurant.photo.images.small.url }}" alt="{{ restaurant.name }}" style="width: 100%; height: 100%; object-fit: cover;"></a>
+                        </div>
+                    </td>
+                    <td style="padding: 10px; border-radius: 2px;">{{ restaurant.description|truncatewords:100 }}</td>
+                    <td style="text-align: center; padding: 10px; border-radius: 2px;">{{ restaurant.location_string }} <br> <br><b>{{ restaurant.open_now_text }}</b></td>
+                    <td style="text-align: center; font-weight: bold; padding: 10px; border-radius: 2px;">{{ restaurant.rating }} <br> <a href="{{ restaurant.web_url }}"><img src="https://cdn.discordapp.com/attachments/1216824788106875030/1221384479466192967/icons8-star-48.png?ex=661261f0&is=65ffecf0&hm=2d3cece67ec7ffd135aa441097d8d5cb2c09b1f48bb32f92b7913d5756b717e1&" alt="Rating"></a> </td>
+                    <td style="text-align: center; font-weight: bold; padding: 10px; border-radius: 2px;">{{ restaurant.num_reviews }} <br> <a href="{{ restaurant.write_review }}"><img src="https://cdn.discordapp.com/attachments/1216824788106875030/1221384479260676096/icons8-review-48.png?ex=661261f0&is=65ffecf0&hm=b0f068005a1aa218c67cc8e64a4865d7d36274c45d49cc86fb61ba1bada08d7f&" alt="Review"></a> </td>
+
+                {% endif %}
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('container').style.overflowY = 'auto';
+        document.getElementById('scrollToRestaurants').scrollIntoView({ behavior: 'smooth' });
+    </script>
+
+{% endif %}
+
+</body>
+</html>

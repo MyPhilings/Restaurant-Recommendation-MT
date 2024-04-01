@@ -1,0 +1,174 @@
+:root {
+    --palette-magenta: rgb(255, 89, 167);
+    --palette-peach: rgb(240, 101, 67);
+    --palette-orange: rgb(240, 157, 81);
+    --palette-white: rgb(232, 233, 235);
+}
+
+* {
+
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+
+}   
+
+body {
+    height: 120vh;
+    width: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: absolute;
+    background-image: url(https://cdn.discordapp.com/attachments/1219504237789188146/1219605671041957938/blur-people-in-cafe-restaurant-with-light-bokeh-background.png?ex=660be94b&is=65f9744b&hm=3ecb2f491b824d95c50b12eb7284c82c10cad8c03e292eeb18b1c7260fc717a2&);
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.diagonal-bg-1 {
+    position: absolute;
+    height: 120%;
+    width: 100%;
+    overflow: hidden;
+    transform: scaleX(150%);
+}
+
+.diagonal-bg-1::after {
+    content: '';
+
+    background-image: linear-gradient(45deg, rgb(240, 157, 81), rgb(247, 37, 133), rgb(181,23,158),rgb(247, 37, 133));
+    background-size: 300% 300%;
+    background-repeat: no-repeat;
+    border-radius: 35% 65% 21% 79% / 49% 48% 52% 51% ;
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    transform: rotate(-70deg);
+    animation: animate 5s ease-in-out infinite, gradient-color 5s ease-in-out infinite;
+    transition: all 1s ease-in-out;
+}
+
+@keyframes animate {
+    0% {
+        border-radius:  35% 65% 21% 79% / 49% 48% 52% 51% ;
+    }
+
+    50% {
+        border-radius: 75% 25% 69% 31% / 49% 48% 52% 51% ;
+    }
+}
+
+@keyframes gradient-color {
+    0% {
+        background-position: 0 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+/* Logo */
+
+.logo {
+    position: fixed;
+    width: 100%;
+    padding-left: 15px;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+}
+
+.logo a {
+    text-decoration: none;
+    color: white;
+}
+
+
+/* Hero */
+
+.hero {
+    color: #FFFFFF;
+    position: relative;
+    padding-top: 13%;
+}
+
+.hero h1 {
+    height: 100%;
+    width: 100%;
+    font-size: 600%;
+}
+
+.hero form {
+    display: flex;
+    width: 50%;
+    margin-top: 35px;
+}
+
+.hero input {
+
+    flex: 1;
+    font-size: 100%;
+    border: none;
+    outline: none;
+    margin-left: 5px;
+    width: 100%;
+    height: 50px;
+}
+
+/*  */
+
+.custom-shape-divider-bottom-1711278834 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1711278834 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 133px;
+}
+
+.custom-shape-divider-bottom-1711278834 .shape-fill {
+    fill: #FFFFFF;
+}
+
+/*  */
+
+/* Table for some reason I can't edit the table styles here. But you can do it in the HTML */
+
+.content-header h2 {
+    background-image: linear-gradient(45deg, rgb(240, 157, 81), rgb(247, 37, 133));
+    background-clip: text;
+    color: transparent;
+    height: 100%;
+    width: 100%;
+    margin-top: 70vh;
+    font-size: 300%;
+}
+
+/* .resto_tables {
+    padding-left: 5%;
+} */
+
+/*  */
+
+.copyright {
+    position: absolute;
+    text-align: right;
+    color: #FFFFFF;
+    width: 100%;
+    bottom: 0;
+    margin-left: -20px;  
+    z-index: 1;
+}
